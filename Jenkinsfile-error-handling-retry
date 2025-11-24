@@ -1,0 +1,19 @@
+pipeline{
+   agent any
+
+   tools{
+    maven 'mymaven'
+   }
+
+   stages{
+   
+    stage(build){
+        steps{
+          retry(3){
+            
+            sh 'mvn package'
+          }
+        }
+      }
+    }
+}

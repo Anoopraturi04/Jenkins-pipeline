@@ -1,0 +1,39 @@
+pipeline{
+
+    agent any
+
+    tools{
+        maven 'mymaven'
+    }
+
+    stages{
+        stage('Test Code'){
+            steps{
+               
+                script{
+                   int maxRetries = 3
+                   int retries = 0
+                   boolean success = false
+                   // write a loop taht will retry the code for given maxRetries
+                while(retries<maxRetries && !success){
+                   try{
+                      sh 'mvn tst'
+                      success = true
+                    }
+                    catch(Exception e){ // if the code in the try block fails, catch block will be executed 
+                      retries++ // increment the variable retries by 1
+                      echo "Attempt ${retries} failed. Retrying...."
+                      sleep(10)
+                    }
+                  }
+                    if(!success){
+                       error ("All attempts failed")  
+                    }
+                }
+
+            }
+        }
+    }
+}
+   
+        

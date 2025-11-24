@@ -1,0 +1,39 @@
+pipeline{
+
+    agent any 
+    
+    tools{
+        maven 'mymaven'
+    }
+    parameters{
+        choice(name: 'ENV', choices: ['Dev','QA'])
+    }
+    stages{
+
+        stage('Build on Dev ENV'){
+           steps{
+              script{
+                // define variables
+                // variable of type map
+                // variables storing a key and value
+                def mvnCMD = [
+                   Dev: 'compile',
+                   QA: 'test'
+                ]  
+                // aother way of defining variable 
+                // def Dev = 'compile'
+                // def QA = 'test'
+                
+                //define(def) a variable storing another variable
+                def CMD = mvnCMD[params.ENV]// here the value come from Parameter define above
+        // here is the admin at runtime selects the parameter env = dev
+        // then the variable CMD = mvnCMD[Dev]
+        // then value of cmd = compile 
+
+        git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+        sh "mvn ${CMD}"
+               }
+            }
+        }
+    }
+}

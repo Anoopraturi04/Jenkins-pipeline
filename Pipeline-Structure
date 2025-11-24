@@ -1,0 +1,72 @@
+// Use // to write comment, it is not a code , it is just description. It will not be executed
+// all the code is written in between the pipeline{}
+pipeline{
+
+agent{
+    this is a mandatory section
+    name of the VM/server/windows/mac  server where the pipeline has to be executed 
+    Pipeline can also be executed on the same EC2 server where Jenkins is installed
+
+}
+
+tools{
+    This is not mandatory
+    If pipeline has to use specific version of any of the tools 
+    Mention the name of the tool that has been configured in the settings-tools section of Jenkins
+    Example: mymaven
+}
+
+triggers{
+    At what event or time the pipeline has to be executed.
+    This is not mandatory
+    We can setup triggers directly on the pipeline job, just like we did in freestyle.
+    Or you can write code for PollSCM and perodic triggers
+}
+
+
+parameters{
+    // Not mandatory
+    // Variables are temporary location that store some data
+    // They allow us to run the pipeline with different sets of data 
+    // this data can be passed when executed the pipeline
+    // Parameterized pipeline 
+}
+enviornment{ 
+    // not mandatory 
+    // creates enviornment varibles
+    // stores data to be used within this pipeline
+}
+
+stages{
+    // This is the main section of pipeline 
+    // This is mandatory section
+    // Stages section consist of stage 
+    // the stage are jobs to be executed 
+    // they are executed in sequence
+    // Can also be executed in parallel
+ 
+    stage("JOB1"){
+      // This is mandatory section
+       steps{
+          // This is mandatory section
+          // here we write the commands. Scripts to be executed
+       }  
+    }
+    stage("JOB2"){
+       steps{
+          // Write any commands or scripts
+          // in a stage 1 step 
+          // Multiple commands
+        }
+        post{
+         success{   
+            commands to be executed after the steps have been completed  
+            }
+         failure{
+            commnad to be executed after the steps have been completed
+            }
+        }
+    }
+}
+
+}

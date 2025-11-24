@@ -1,0 +1,20 @@
+ pipeline{
+
+    agent any
+    
+
+    stages{
+        stage('Job1'){
+            steps{
+                // steps to print variable values
+                // use the parameters => ${params.name}
+                // go to the parameter section, go to the given parameter name and fetch the value 
+                
+                echo "Hello ${params.PERSON}" // Hello Anoop
+                echo "Learn the DevOps tool ${params.Tool}" // Learn the DevOps tool Jenkins
+                echo "Work in the Enviornment: ${params.ENV}"  
+                echo "Work on the git branch: ${params.Branch}"
+            }
+        }
+    }
+ }

@@ -1,0 +1,35 @@
+pipeline{
+
+    agent any
+
+    tools{
+        maven 'mymaven'
+    }
+
+    stages{
+        
+        stage('CLone the Repo'){ 
+            steps{
+              git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+            }
+        }
+
+        stage('Test the Repo'){
+            steps{
+              sh 'mvn test'  
+              script{ //if we want to use jenkins grovvy related functions or logic, then we write in a script
+                timeout(time: 10, unit: 'MINUTES'){
+                input(id: 'DeployGate', message: 'Continue to Deploy') 
+                //it gives us 2 button to click on consloe output
+                // the button name are proceed and abort 
+                }
+              }
+            }
+        }
+        stage('Deploy code'){
+            steps{
+                echo "deployed the code"
+            }
+        }
+    }
+}
