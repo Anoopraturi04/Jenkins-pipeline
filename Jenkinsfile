@@ -11,7 +11,7 @@
 
     // choice = list of values/multiple values 
     // parameterts are used/reffered in the stages   
-    }  
+    }  ///test
 
     stages{
         stage('Job1'){
