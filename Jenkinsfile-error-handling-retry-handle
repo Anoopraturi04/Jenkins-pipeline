@@ -19,7 +19,7 @@ pipeline{
                    try{
                       sh 'mvn tst'
                       success = true
-                    }
+                    }  
                     catch(Exception e){ // if the code in the try block fails, catch block will be executed 
                       retries++ // increment the variable retries by 1
                       echo "Attempt ${retries} failed. Retrying...."
