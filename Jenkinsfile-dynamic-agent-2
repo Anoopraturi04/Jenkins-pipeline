@@ -17,8 +17,9 @@ pipeline{
         }
         stage('Test the code on Dynamic Agent'){
             agent{
-                image 'maven:3.8.5-openjdk-17'
-            }
+                docker{
+                    image 'maven:3.8.5-openjdk-17'
+                }
             steps{
                 git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
                 sh 'mvn clean test'
