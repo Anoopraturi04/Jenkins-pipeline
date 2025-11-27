@@ -1,0 +1,24 @@
+// create  a pipeline that will take java code and build the artifact 
+pipeline{
+
+    agent {
+        docker{
+            image 'maven:3.8.5-openjdk-17'
+            // args '-u root -v /root/.m2:/root/.m2'
+        }
+    }
+
+    stages{
+        stage('Clone the Repo'){
+            steps{
+                git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+            }
+        }
+        stage('Test the code on Dynamic Agent'){
+            steps{
+                sh 'mvn clean test'
+            }
+        }
+        
+    }
+}
