@@ -1,0 +1,22 @@
+pipeline{
+    agent{
+        docker{
+            image 'python:3.11-slim'
+        }
+    }
+    Stages{
+        stage('Build'){
+           steps{
+              echo 'Building inside Docker container...'
+              sh 'python --version'
+           }
+        }
+        stage('Test'){
+            steps{
+                echo 'Running tests...'
+                sh 'python -c "print(\'All tests passed!\')"'
+            }
+
+        }
+    }
+}
