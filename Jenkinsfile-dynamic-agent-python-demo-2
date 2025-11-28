@@ -1,0 +1,39 @@
+pipeline{
+
+    agent{
+        docker{
+            image 'pyhton:3.11-slim'
+        }
+    }
+    environment{
+        VENV_PATH = '.env' // variable storing name of virtual environment
+        PYTHONPATH = '.'
+    }
+    stages{
+        stage('checkout Code'){
+            steps{
+               git 'https://github.com/Sonal0409/Jenkins-Python-Pipeline-demo.git'
+            }
+
+        }
+        stage('Set up Environment on the container'){
+            steps{
+                sh '''
+                    python -m venv ${VENV_PATH}
+                    . ${VENV_PATH}/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt 
+                '''
+            }
+        }
+        stage('Review the python code'){
+            steps{
+                sh '''
+                   . ${VENV_PATH}/bin/activate
+                   flake8 app.py tests/
+                '''
+            }
+
+        }
+    }
+}
