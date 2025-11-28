@@ -30,7 +30,7 @@ pipeline{
             steps{
                 sh '''
                    . ${VENV_PATH}/bin/activate
-                   flake8 app.py tests/
+                    pytest tests/ --junitxml=reports/test-results.xml --cov=app --cov-report=xml
                 '''
             }
 
