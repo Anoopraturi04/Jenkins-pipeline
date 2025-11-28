@@ -21,20 +21,12 @@ pipeline{
                 docker{
                     image 'maven:3.8.5-openjdk-17'
                 }
+            }
             steps{
                 git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
                 sh 'mvn clean test'
             }
         }
         
-        
-        
-        stage('Delete image after Job is done'){
-            steps{
-                sh 'docker rmi maven:3.8.5-openjdk-17'
-            }
-        }
-        
     }
-}
 }
