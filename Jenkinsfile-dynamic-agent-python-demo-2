@@ -6,7 +6,7 @@ pipeline{
         }
     }
     environment{
-        VENV_PATH = '.env' // variable storing name of virtual environment
+        VENV_PATH = '.venv' // variable storing name of virtual environment
         PYTHONPATH = '.'
     }
     stages{
