@@ -4,7 +4,7 @@ pipeline{
             image 'python:3.11-slim'
         }
     }
-    Stages{
+    stages{
         stage('Build'){
            steps{
               echo 'Building inside Docker container...'
