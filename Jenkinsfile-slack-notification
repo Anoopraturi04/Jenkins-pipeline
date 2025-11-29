@@ -6,15 +6,27 @@ pipeline{
     }
 
     stages{
+        stage('Send Notification'){
+            steps{
+                slackSend channel: 'slack-jenkins-channel', message: 'The pipeline Execution is started.'   
+            }
+        }
         stage('Test repo')
         {
             steps{
                 git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
                 sh 'mvn test'
+                lackSend channel: 'slack-jenkins-channel', message: 'The Testcase execution is completed.'
             }
             post{
+                always{
+                    slackSend channel: 'slack-jenkins-channel', message: 'The pipeline Execution is Completed.'
+                }
                 success{
                     slackSend channel: 'slack-jenkins-channel', message: 'The pipeline Execution is Completed and is Successfull.'
+                }
+                failure{
+                    slackSend channel: 'slack-jenkins-channel', message: 'The pipeline Execution is Completed and it has Failed.'
                 }
             }
         }
