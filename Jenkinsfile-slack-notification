@@ -1,0 +1,22 @@
+pipeline{
+    agent any
+
+    tools{
+        maven 'mymaven'
+    }
+
+    stages{
+        stage('Test repo')
+        {
+            steps{
+                git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+                sh 'mvn test'
+            }
+            post{
+                success{
+                    slackSend channel: 'slack-jenkins-channel', message: 'The pipeline Execution is Completed and is Successfull.'
+                }
+            }
+        }
+    }
+}
