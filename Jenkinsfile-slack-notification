@@ -16,7 +16,7 @@ pipeline{
             steps{
                 git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
                 sh 'mvn test'
-                lackSend channel: 'slack-jenkins-channel', message: 'The Testcase execution is completed.'
+                slackSend channel: 'slack-jenkins-channel', message: 'The Testcase execution is completed.'
             }
             post{
                 always{
