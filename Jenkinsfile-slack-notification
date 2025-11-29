@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage('Send Notification'){
             steps{
-                slackSend channel: 'slack-jenkins-channel', message: 'The pipeline Execution is started.'   
+                slackSend channel: 'slack-jenkins-channel', message: 'The pipeline with name ${JOB_NAME} Execution is started.'   
             }
         }
         stage('Test repo')
