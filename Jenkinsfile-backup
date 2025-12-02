@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    environment {
+        BACKUP_FILE = "jenkins-backup-${new Date().format('yyyy-MM-dd-HH-mm')}.tar.gz"
+        S3_BUCKET   = "jenkinsbackup-bucket/jenkins-backups"
+    }
+
+    stages {
+        stage('Backup Jenkins Home') {
+            steps {
+                sh '''
+                tar -czvf /tmp/$BACKUP_FILE /var/lib/jenkins
+                '''
+            }
+        }
+
+        stage('Upload to S3') {
+            steps {
+                sh '''
+                aws s3 cp /tmp/$BACKUP_FILE s3://$S3_BUCKET/
+                '''
+            }
+        }
+    }
+}
