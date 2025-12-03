@@ -6,8 +6,10 @@ pipeline{
     }
     stages{
         stage('Clone Repo'){
-           repo('https://github.com/Anoopraturi04/shared_library_jenkins.git')
-           //here "repo" is the grovvy inside the Shared Library repository that we are using here in this pipline
+            steps{
+                    repo('https://github.com/Anoopraturi04/shared_library_jenkins.git')
+                    //here "repo" is the grovvy inside the Shared Library repository that we are using here in this pipline
+                }
+            }
         }
     }
-}
